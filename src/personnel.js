@@ -10,24 +10,21 @@ export class Person {
     }
 
     // Variables for the Person
-    firstName = ''
-    lastName = ''
-    milpac = ''
-    shortRank = ''
+    firstName = '';
+    lastName = '';
+    milpac;
+    shortRank;
 
-    // Functions for the Person
-    fullName = function() {
-        return this.firstName + " " + this.lastName;
-    }
-
-    // We are outside the class now
     // Create promotion finder: https://github.com/7Cav/CAV-Promotion-GCM/blob/master/Personnel.py#L65
     // Get all possible promotions up until input date.
     pfcArr = [];
     spcArr = [];
     cplArr = [];
 
-    now = Date(Date.now());
-    inputDate;
+
+
+
+    
     // Write to file for promotions: https://github.com/7Cav/CAV-Promotion-GCM/blob/master/Personnel.py#L344
 }
+
