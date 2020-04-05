@@ -8,14 +8,17 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const config = require('./src/config/main.json');
-const Shop1 = require('./src/personnel.js');
+const moment = require('moment');
+const person = require('./src/personnel.js');
+
+//import * as person from './src/personnel.js';
 
 // Bot initilization
 const bot = new Discord.Client();
 const botLogin = config.Login;
 
 bot.on('ready', () => {
-    console.log('Connected as ' + bot.user.tag);1
+    console.log('Connected as ' + bot.user.tag);
     bot.user.setActivity('7cav.us/enlist', {type: 3});
 })
 
@@ -24,7 +27,6 @@ const prefix = '!'; // Command prefix
 bot.on('message', msg => {
     // Don't let the bot deal with its own responses
     if(msg.author.bot) return;
-
 
     if(msg.content.startsWith(prefix)) {
         // Command Args
@@ -38,12 +40,19 @@ bot.on('message', msg => {
             msg.reply('S1 bot is online!');
         }
 
-        if(msg.content.toLowerCase().startsWith('!Personnel')) {
-            console.log(msg.content);
-            // Personnel.ob.ts initilization
-            const S1 = new Shop1(`${args[0]}`, `${args[1]}`, `${args[2]}`, `${args[3]}`);
-            msg.reply(S1.getMilpac());
-            console.log(S1.getMilpac());
+        if(msg.content.startsWith('!Personnel')) {
+            if(args[0] == 'time') {
+                if(args[1] == null) {
+                    msg.reply('Syntax: !Personnel time yyyy/mm/dd')
+                } else {
+                    var diff = moment(`${args[1]}`, "YYYY/MM/DD").fromNow();
+                    var now = moment().format();
+                    var date = moment(args[1], "YYYY/MM/DD").format();
+
+                    console.log(now + " - " + date + "\n" + diff);
+                    msg.reply(`Current date ${now}\nSpecified Date: ${date}\n\nDifference between dates: ${diff}`);
+                }
+            }
         }
     }
 })

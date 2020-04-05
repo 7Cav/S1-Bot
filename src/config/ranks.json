@@ -1,0 +1,30 @@
+{
+    "ranks" : [
+        "Private",
+        "Private First Class", 
+        "Specialist", 
+        "Corporal",
+        "Sergeant", 
+        "Staff Sergeant", 
+        "Sergeant First Class", 
+        "First Sergeant", 
+        "Sergeant Major",
+        "Command Sergeant Major",
+        "Second Lieutenant", 
+        "First Lieutenant", 
+        "Captain", 
+        "Major", 
+        "Lieutenant Colonel", 
+        "Colonel",
+        "Brigadier General", 
+        "Major General", 
+        "General2", 
+        "General", 
+        "General of the Army",
+        "Warrant Officer 1", 
+        "Chief Warrant Officer 2", 
+        "Chief Warrant Officer 3",
+        "Chief Warrant Officer 4", 
+        "Chief Warrant Officer 5"
+    ]
+}
