@@ -7,7 +7,7 @@
 // Libraries
 const Discord = require('discord.js');
 const fs = require('fs');
-const moment = require('moment');
+const moment = require('moment'); // Documentation: https://momentjs.com/
 
 //Locals
 const config = require('./src/config/main.json');
@@ -51,21 +51,22 @@ bot.on('message', msg => {
                 .setColor('#F5CC00')
                 .setThumbnail('https://images.7cav.us/7Cav-small.png')
                 .setTitle('Commands:')
-                .addField('!online', 'Checks to see if bot is responsive')
                 .addField('!S1 time DD/MM/YYYY', 'Gets the difference in days or months between now and the specified time.')
                 .setTimestamp()
             msg.channel.send(help)
             }
 
-            if(args[0] == 'time') {
-                // !Personnel time
-                if(args[1] == null) {
-                    msg.reply('Syntax: !Personnel time DD/MM/YYYY')
-                } else {
-                    // Create a new Person() and pass args[1] (DDD/MM/YYYY)
-                    const p = new Person(args[1]);
-                    msg.reply(`Today is ${p.getToday()} \n ${args[1]} is ${p.getDifference()}`);
-                }
+            if(args[1] == null) {
+                msg.reply('Syntax: !Personnel time DD/MM/YYYY');
+                return;
+            } else if(args[1] == 'now') {
+                msg.reply(`Today is ${p.getToday()} \n ${moment().add(1, 'days').calendar()} is in 24 hours`);
+                return;
+            } else if(args[1] == 'week')
+            {
+                msg.reply(`Today is ${p.getToday()} \n ${moment().add(7, 'days').calendar()} is ${p.getDifference()}`);
+            } else {
+                msg.reply(`Today is ${p.getToday()} \n ${args[1]} is ${p.getDifference()}`);
             }
         }
     }
