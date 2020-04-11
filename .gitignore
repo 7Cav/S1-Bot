@@ -1,2 +1,3 @@
 node_modules/
 src/config/main.json
+client_secret.json

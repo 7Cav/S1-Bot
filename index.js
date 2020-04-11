@@ -8,6 +8,18 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const moment = require('moment'); // Documentation: https://momentjs.com/
+const config = require('./src/config/main.json')
+const GoogleSpreadsheet = require('google-spreadsheet');
+const {promisify} = require('util');
+
+const creds = require('./client_secret.json');
+async function accessSpreadsheet() {
+    const doc = new GoogleSpreadsheet(config.GoogleSheets.SheetID);
+    await promisify(doc.useServiceAccountAuth)(creds);
+    const info = await promisify(doc.getInfo)();
+    const sheet = info.worksheet[1];
+    console.log(`title: ${sheet.title}, Rows: ${sheet.rowCount}`);
+}
 
 //Locals
 const config = require('./src/config/main.json');
@@ -42,7 +54,7 @@ bot.on('message', msg => {
             msg.reply('S1 bot is online!');
         }
 
-        //#region S1 commands
+       //#region S1 commands
         if(msg.content.startsWith('!S1')) {
             // !S1
             if(args[0] == null) {
@@ -58,7 +70,7 @@ bot.on('message', msg => {
             msg.channel.send(help)
             }
 
-            // Time command and options
+            // Time command and options 
             if(args[0] == 'time') {
                 if(args[1] == null) {
                     msg.reply('Syntax: !Personnel time DD/MM/YYYY');
@@ -77,9 +89,9 @@ bot.on('message', msg => {
             // Promotions
             // TODO: add check if author.id is in
             //var roles = msg.author.roles.has(config.DiscordRoles.S1Command || config.DiscordRoles.S6);
+            // !S1 promo
             if(args[0] == 'promo' /*&& roles*/) {
-                var data = p.getData();
-                    console.log(data);
+
             }
 
             if(args[0] == 'add') {
