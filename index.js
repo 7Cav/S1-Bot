@@ -12,7 +12,6 @@ const moment = require('moment'); // Documentation: https://momentjs.com/
 //Locals
 const config = require('./src/config/main.json');
 const Person = require('./src/personnel.js');
-const {getData} = require('./src/GoogleSheets.js');
 
 // Bot initilization
 const bot = new Discord.Client();
@@ -24,7 +23,7 @@ bot.on('ready', () => {
 })
 
 const prefix = '!'; // Command prefix
-const p = new Person();
+const p = new Person(bot);
 
 bot.on('message', msg => {
     // Don't let the bot deal with its own responses
@@ -76,12 +75,11 @@ bot.on('message', msg => {
             }
             
             // Promotions
-            if(args[0] == 'promo') {
-                if(msg.author.roles.has(config.DiscordRoles.S1Command || config.DiscordRoles.S6)) {
-                    if(args[1] == 'login') {
-                        getData();
-                    }
-                }
+            // TODO: add check if author.id is in
+            //var roles = msg.author.roles.has(config.DiscordRoles.S1Command || config.DiscordRoles.S6);
+            if(args[0] == 'promo' /*&& roles*/) {
+                var data = p.getData();
+                    console.log(data);
             }
 
             if(args[0] == 'add') {
