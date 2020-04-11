@@ -1,12 +1,11 @@
 const moment = require('moment');
+const fs = require('fs');
 // Class to make life easier
 class Person {
     // How constructors are used: var something = Person(constructor, items, here);
     // This is very similar to how C# works if you ever get into it.
-    constructor(date) {
-        // Set the Person.inputYear to the year. Do the same with month and day
-        this.inputDate = date;
-        this.today = moment();
+    constructor() {
+
     }
     
     getToday() {
@@ -14,28 +13,45 @@ class Person {
         return today;
     }
 
-    getDifference() {
-        var diff = moment(`${this.inputDate}`, "DD/MM/YYYY").fromNow();
+    getDifference(inputDate) {
+        var diff = moment(`${inputDate}`, "DD/MM/YYYY").fromNow();
         return diff;
     }
 
-    // Variables for the Person
-    // firstName = '';
-    // lastName = '';
-    // milpac;
-    // shortRank;
+    add(name, discordID) {
+        var value;
+        if(name == null || discordID == null) {
+            value = "Syntax: !S1 add Last.F DiscordID"
+        }
 
-    // Create promotion finder: https://github.com/7Cav/CAV-Promotion-GCM/blob/master/Personnel.py#L65
+        // TODO: append 'name: discordID' to users.json
+        if(name != null && discordID != null) {
+            var user = {
+                    name: name,
+                    discord: discordID
+            }
+        
+            fs.writeFile("./src/config/users.json", JSON.stringify( user, null, 4), (err) => {
+                if(err) {
+                    console.error(err);
+                    return;
+                }
+                console.log("User added to file");
+            })
+
+            value = `${name} has been added to the allowed S1 users.`
+        }
+    
+        return value;
+    }
+
+    //TODO: Create promotion finder: https://github.com/7Cav/CAV-Promotion-GCM/blob/master/Personnel.py#L65
     // Get all possible promotions up until input date.
     // pfcArr = [];
     // spcArr = [];
     // cplArr = [];
 
-
-
-
-    
-    // Write to file for promotions: https://github.com/7Cav/CAV-Promotion-GCM/blob/master/Personnel.py#L344
+    // TODO: Write to file for promotions: https://github.com/7Cav/CAV-Promotion-GCM/blob/master/Personnel.py#L344
 }
 
 module.exports = Person

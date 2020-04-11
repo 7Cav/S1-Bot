@@ -1,6 +1,11 @@
 {
         "Login": ""
-        "GoogleSheets" : {
-                "SheetID" : ""
+        "DiscordRoles": {
+                "S1Command": "",
+                "S6": ""
+        }
+        "GoogleSheets" {
+                "SheetID": "",
+                "Range": ""
         }
 }
