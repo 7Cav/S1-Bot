@@ -3,8 +3,8 @@
         "DiscordRoles": {
                 "S1Command": "",
                 "S6": ""
-        }
-        "GoogleSheets" {
+        },
+        "GoogleSheets": {
                 "SheetID": "",
                 "Range": ""
         }
